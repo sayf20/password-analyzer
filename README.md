@@ -36,9 +36,9 @@ A simple but powerful web app that checks password strength using [zxcvbn](https
 
 ## 📸 Screenshots
 
-![Strong Password Screenshot](Strong.png)
+![Strong Password Screenshot](screenshots/strong.png)
 
-![Weak Password Screenshot](Weak.png)
+![Weak Password Screenshot](screenshots/weak.png)
 
 ---
 
