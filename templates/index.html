@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Analyzer</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #121212;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        }
+
+        h2 {
+            font-size: 36px;
+            color: #1db954;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            background-color: #1f1f1f;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 2px solid #3a3a3a;
+            background-color: #2e2e2e;
+            color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, button:focus {
+            outline: none;
+            border-color: #1db954;
+            box-shadow: 0 0 5px #1db954;
+        }
+
+        button {
+            background-color: #1db954;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1b9b47;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .feedback {
+            font-weight: bold;
+            font-size: 16px;
+            color: #ffcc00;
+        }
+
+        .strength-weak {
+            color: #ff0000;
+        }
+
+        .strength-medium {
+            color: #ffcc00;
+        }
+
+        .strength-strong {
+            color: #1db954;
+        }
+
+        .strength-very-strong {
+            color: #1aaf00;
+        }
+
+        .footer {
+            position:relative;
+            right:450px;
+            bottom: -350px;
+            font-size: 14px;
+            color: #888;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔐 Password Strength Analyzer</h2>
+        <form method="POST">
+            <input type="text" name="password" placeholder="Enter a password" required style="width: 95%;">
+            <button type="submit">Check Strength</button>
+        </form>
+
+        {% if strength is not none %}
+        <div class="result">
+            <p><strong>Password:</strong> {{ password }}</p>
+            <p><strong>Strength Score:</strong> {{ strength }} / 4</p>
+            <p><strong class="feedback">Feedback:</strong> 
+                {% if strength == 0 %}
+                    Very Weak - Try adding more characters and special symbols.
+                {% elif strength == 1 %}
+                    Weak - Consider using a mix of letters, numbers, and special characters.
+                {% elif strength == 2 %}
+                    Medium - Great! Add some more unique elements to improve.
+                {% elif strength == 3 %}
+                    Strong - Looks good! Try adding some unpredictability.
+                {% else %}
+                    Very Strong - Excellent! Your password is highly secure.
+                {% endif %}
+            </p>
+            <p class="{% if strength == 0 %}strength-weak{% elif strength == 1 %}strength-medium{% elif strength == 2 %}strength-medium{% elif strength == 3 %}strength-strong{% else %}strength-very-strong{% endif %}">
+                Status: {{ ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'][strength] }}
+            </p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="footer ">
+        <p>Created with ❤️ for secure cyberspace</p>
+    </div>
+</body>
+</html>
